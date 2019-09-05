@@ -1,0 +1,62 @@
+.title-slide {
+  background-image: url("img/logo.png");
+  background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+  /*background-position: 9% 15%;
+  background-size: 255px;
+  background-color: #fff;
+  padding-left: 100px; */ /* delete this for 4:3 aspect ratio */
+}
+
+.title-slide h1 {
+  color: #FFF;
+  padding-top: 150px;
+}
+
+.title-slide h2 {
+  color: #FFF;
+}
+
+.title-slide h3 {
+  color: #FFF;
+  padding-bottom: 15px;
+}
+
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+tr:nth-child(even) { background: #eee }
+
+
+.kable-table {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 20px;
+  max-height: 350px;
+}
+
+.kable-table table {
+  margin-bottom: 0px;
+}
+
+.kable-table table>thead>tr>th {
+  border: none;
+  border-bottom: 2px solid #dddddd;
+}
+
+.kable-table table>thead {
+  background-color: #fff;
+}

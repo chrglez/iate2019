@@ -1,0 +1,372 @@
+---
+title: "The structure of the network of visited attractions in an urban destination"
+author: 'Christian González-Martel, Juan M. Hernández and Yolanda Santana-Jiménez'
+date: "2019/09/05  -- La Plata "
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    css: ["rutgers", "rutgers-fonts", "./custom.css"]
+    
+     
+    nature:
+      beforeInit: "js/ru_xaringan.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+
+    includes:
+      in_header: "header.html"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+class:  inverse, center, middle
+
+# Table of contents
+
+---
+
+## Table of contents
+
+1. [Introduction](#1introduction)
+
+2. [Hypothesis](#2hypothesis)
+
+3. [Methodology](#3methodology)
+
+4. [Results](#4results)
+
+5. [Conclusions](#5conclusions)
+
+---
+
+class:  inverse, center, middle
+name: 1introduction
+
+# 1. Introduction
+
+---
+background-image: url('img/parislondon.png')
+background-size: 450px
+background-position: 80% 50%
+
+## 1. Introduction
+
+.pull-left[
+* A urban destination include a bundle of attractions, which can be classified in different categories.
+
+* During the stay, the tourist visits a certain number of attractions (co-occurrence of visits).
+
+* Knowing the structure of co-occurrence of visits is crucial for attraction cooperation, efficient promotion and impact management. 
+
+    * Which are the factors infuencing the co-occurrence of visits?
+    * Is there any evolutionary pattern of this co-occurrence of visits?
+]
+
+---
+
+###  Literature review. Co-occurrence of visits to attractions
+
+* Co-occurrence of visits is related with the theoretical and empirical studies of within-destination tourist movement [Lew & McKercher, ATR, 2006; McKercher & Lau, TG, 2008; Shoval, McKercher, Ng & Birenboim, ATR, 2011]
+
+* Several factors have been determined in tourist movements: distance decay; role of iconic (popular) attractions; rating in travel websites.
+
+* Tourists interests (or perceived image) can determine the type (category) of attractions to visit [Marine-Roig & Clavé, JDMM, 2016]
+
+* Repeated visitors are more selective than first-timers [Caldeira & Kastenholz, JVM, 2018] 
+
+---
+
+###  Literature review. Social Network Analysis (SNA) for attraction networks
+
+* An attraction network is a set of attractions and weighted edges among them (number of tourist who have visited both attractions)
+
+* Most of previous studies analyzing attraction networks uses exploratory metrics of social networks (e.g. node centrality and clustering).
+
+* An statistical inference method is necessary to determine whether some factors (e.g. popularity) significantly influence on the probability of co-occurrence of visits.
+
+* Exponential random graph models (ERGM) have been recently applied in tourism research [Khalilzadeh, ATR, 2018; Williams & Hristov, TM, 2018] 
+
+---
+
+class:  inverse, center, middle
+name: 2hypothesis
+
+# 2. Hypothesis
+
+---
+
+## 2. Hypothesis
+
+.blue[H1.] The probability of co-occurrence of visits decreases with the physical distance between attractions.
+
+.blue[H2.] Iconic attractions in urban destinations have higher probability to be visited than non-iconic attractions, independently of distance. However, iconic attractions are more prone to be jointly visited with non-iconic attractions.
+
+.blue[H3.] High reviewed/rated attractions in urban destinations are more prone to be visited than low reviewed/rated attractions. Moreover, high reviewed/rated attractions are more prone to be jointly visited with other high reviewed/rated attractions.
+
+.blue[H4.] Non-iconic attractions are more prone to be jointly visited with other attractions belonging to the same category.
+
+---
+
+class:  inverse, center, middle
+name: 3methodology
+
+# 3. Methodology
+
+---
+
+# 3. Methodology
+
+## Data sample
+
+* We collect reviews about attractions from Madrid in TripAdvisor from November 2013 to November 2018 and we build attractions-attractions network.
+
+```{r, echo=FALSE}
+library(igraph)
+library(networkD3)
+
+# create a dataset:
+links <- data.frame(
+  from=c(1,1,2,2,2,3,3,4)-1,
+  to=c(5,7,6,7,8,7,9,8)-1,
+  value = rep(1,8)
+)
+
+nodes <- data.frame(
+  name=c('T1','T2','T3','T4','A1','A2','A3','A4','A5'),
+  group=c(rep('Tourist',4),rep('Attraction',5)),
+  value = rep(10,9))
+
+YourColors <- 'd3.scaleOrdinal().range([ "#FFA500", "#4169E1",  "#32CD32",
+                                         "#FFC0CB", "#8A2BE2", "#FF6347"]);'
+
+# Plot
+p <- forceNetwork(Links = links, Nodes = nodes,
+                  Source = "from", Target = "to",
+            Value = "value", NodeID = "name",
+            Group = "group", colourScale = JS(YourColors),
+            fontSize = 24, height="300px", width="300px",
+            radiusCalculation = JS("Math.sqrt(d.nodesize)+20"),
+            legend = TRUE)
+```
+---
+
+## Data sample
+
+```{r, echo=FALSE}
+src <- c("A1", "A4", "A3")
+target <- c("A3", "A2", "A5")
+networkData <- data.frame(src, target)
+
+# Plot
+p <- simpleNetwork(networkData,height="300px", width="300px")
+p
+```
+---
+
+## Data sample
+
+* Reviews were restricted to those reviewers who explicitly indicate an origin different from Madrid.
+
+* We build five networks corresponding to five consecutive years.
+
+---
+
+## EGRM
+
+Given $Y$ a valued random network variable and $y$ a particular realization, the linear ERGM has the form:
+$$P_{\theta,h,g}(Y=y)=\frac{h(y)\cdot\mbox{exp}(\theta\cdot g(y))}{K_{h,g}(\theta)}$$
+
+* $\theta$ is a vector of coefficients; $g(\cdot)$ represents a vector of sufficient statistics in the state space of $Y$; $K$ is the normalized constant; $h(\cdot)$ is the reference measure.
+* Given a form of $g(y)$, the solution estimates $\theta$ with the maximum likelihood.
+* The solution is implemented in the R-package [ergm](https://cran.r-project.org/web/packages/ergm/index.html).
+
+---
+
+## Explanatory variables
+
+| Factors  |    Description| 
+|:---------|:-------------|
+| **Structural effects** || 
+| Intensity |   Sum of all edge weights   |  
+| Edges | Total number of edges |
+ |**Nodal effects**||
+ |Reviews|Number of reviews received by the attraction|
+ |Rating|Mean rating of the attraction|
+ |Category i|Attraction belongs to category i (i=1..7)|
+|**Relational effects**||
+|Reviews diff|Difference in the number of reviews between two attractions|
+|Rating diff|Difference in the mean rating between two attractions|
+|Category i Mch.|Nodematch: Two linked attractions belongs to category i (i=1..7)|
+|**Environmental effects**||
+|Distance|Geographic distance between attractions in the network|
+
+---
+class:  inverse, center, middle
+name: 4results
+
+# 4. Results
+
+---
+## Exploratory analysis
+
+```{r, echo = F, message = F, fig.align='center', fig.width=14, fig.height=7}
+
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+tabla1 <- readr::read_csv2('tabla1.csv', col_names = TRUE)
+
+tabla <- tabla1 %>%
+  slice(-c(1:10)*8)
+
+attr(tabla, 'spec') <- NULL
+tabla %>% ggplot(aes(x= as.factor(Year), y = Value, group = 1, colour = Category) ) + geom_line(size = 3) + facet_grid(Variable~Category, scales = "free")  + labs(x='', y='') +theme_light() + theme(axis.text.x = element_text( angle = 45, hjust=1), strip.text.x = element_text(
+        size = 7, face = "bold.italic"
+        ))
+
+
+
+```
+
+
+---
+background-image: url('img/madrid_terrain_all_article_corregido.jpg')
+background-position: center
+background-size: cover
+---
+
+background-image: url('img/my.gif')
+background-position: center
+background-size: cover
+---
+
+## Exploratory analysis
+
+```{r, echo = F, message = F, fig.align='center', fig.width=14, fig.height=7}
+
+tabla2 <- readr::read_csv2('tabla2.csv')
+effect_type <- c(rep('Structural',2),rep('Structural',2),rep('Nodal',8),rep('Structural',2),rep('Nodal',8),rep('Relational',9),rep('Structural',2),rep('Nodal',8),rep('Relational',9),'Envioromental')
+tabla2 <- tabla2 %>%
+  slice(-c(1,4,13,23,25,26,27,28)) %>%
+  tidyr::gather(key = 'model', value = 'value', -Parameter1) %>%
+  filter(!is.na(value)) %>%
+  separate(col = value, into = c('value','p_value'), sep = " ", convert = TRUE) %>%
+  mutate(p_value= as.numeric(stringr::str_remove_all(.$p_value,'[\\(\\)]')),
+         effect = effect_type)
+
+theme_new <- function(base_size = 11,
+                      base_family = "",
+                      base_line_size = base_size / 170,
+                      base_rect_size = base_size / 170){
+  theme_minimal(base_size = base_size, 
+                base_family = base_family,
+                base_line_size = base_line_size) %+replace%
+    theme(
+      plot.title = element_text(
+        color = rgb(25, 43, 65, maxColorValue = 255), 
+        face = "bold",
+        hjust = 0),
+      axis.title = element_text(
+        color = rgb(105, 105, 105, maxColorValue = 255),
+        size = rel(0.75)),
+      axis.text = element_text(
+        color = rgb(105, 105, 105, maxColorValue = 255),
+        size = rel(0.5)),
+      panel.grid.major = element_line(
+        rgb(105, 105, 105, maxColorValue = 255),
+        linetype = "dotted"),   
+      panel.grid.minor = element_line(
+        rgb(105, 105, 105, maxColorValue = 255),
+        linetype = "dotted", 
+        size = rel(4)),   
+      
+      complete = TRUE
+    )
+}
+
+gg <- tabla2 %>% ggplot() + geom_jitter(aes(x= p_value, y = value, colour = effect), alpha = 0.5, size = 10) + geom_jitter(aes(x= p_value, y = value), size = 10,
+              alpha = 0.8,
+              shape = 21, 
+              color = "white",  
+              stroke = 0.4) + theme_new() + facet_wrap(~model, nrow = 2, ncol = 2)
+
+gg
+```
+
+
+---
+#### Estimates for four successive ERGM models for the Year 5 (2017-2018) attraction network 
+
+```{r, echo = F, message = F, warning=F}
+library(knitr)
+library(kableExtra)
+tabla3 <- readr::read_csv2('tabla3.csv')
+parametros <- read.csv2('parametros.csv', header = F)
+parametros <- as.vector(parametros[,1])
+names(parametros) <- NULL
+
+
+tabla3$Parameter <- parametros
+
+tabla3 %>%
+  select(Parameter:`Year 5`) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = T, font_size = 16) %>%
+  pack_rows(index = c("Structural effects " = 2, "Node effects" = 8, "Relational effects" = 9, "Environmental effects" = 1)) %>% scroll_box(width = "100%", height = "500px")
+```
+
+---
+#### Odds ratio for the attraction network in Madrid (november 2013-november 2018)
+
+```{r, echo = F, message = F}
+tabla4 <- readr::read_csv2('tabla4.csv', col_names = F)
+
+tabla_4 <- tabla3
+tabla_4[,2:6] <- as.matrix(tabla4)
+
+tabla_4 %>%
+  select(Parameter:`Year 5`) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = T, font_size = 16) %>%
+  pack_rows(index = c("Structural effects " = 2, "Node effects" = 8, "Relational effects" = 9, "Environmental effects" = 1))  %>% scroll_box(width = "100%", height = "500px")
+```
+---
+
+
+class:  inverse, center, middle
+name: 5conclusions
+
+# 5. Conclusions
+
+---
+
+## Conclusions
+
+* This study analyzes factors influencing the co-occurrence of visits to attractions in an urban destination 
+
+* The methodology (ERGM) allows estimating the effect of some individual and relational characteristics of the attractions (popularity, rating, category, distance) on the probability of co-occurrence.
+
+* Some results agree with previous findings in tourist movement studies, such as the negative effect of distance and the positive effect of popularity and ratings.
+
+* New findings are obtained:
+    * <ru-blockquote>Iconic attractions are more prone to be jointly visited with non-iconic attractions</ru-blockquote>
+    * <ru-blockquote>Homophily is observed in attractions with similar popularity, rating and belonging to the same category.</ru-blockquote> 
+    
+* Homophily in popularity and category has increased over the years.
+
+
+
+
+
+
+
+
+
+
+

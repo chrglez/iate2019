@@ -1,0 +1,81 @@
+Category;Year;Variable;Value
+1. Iconic;Year 1;number of attractions;5
+2. Monuments and Streets;Year 1;number of attractions;71
+3. Museums and Theatres;Year 1;number of attractions;46
+4. Architecture and History Non-Sacred;Year 1;number of attractions;11
+5. Nature, Parks and Animals;Year 1;number of attractions;10
+6. Religious Sites;Year 1;number of attractions;16
+7. Shopping;Year 1;number of attractions;7
+Total;Year 1;number of attractions;166
+1. Iconic;Year 1;number of reviews;7882
+2. Monuments and Streets;Year 1;number of reviews;2381
+3. Museums and Theatres;Year 1;number of reviews;2574
+4. Architecture and History Non-Sacred;Year 1;number of reviews;712
+5. Nature, Parks and Animals;Year 1;number of reviews;519
+6. Religious Sites;Year 1;number of reviews;252
+7. Shopping;Year 1;number of reviews;111
+Total;Year 1;number of reviews;14431
+1. Iconic;Year 2;number of attractions;5
+2. Monuments and Streets;Year 2;number of attractions;133
+3. Museums and Theatres;Year 2;number of attractions;67
+4. Architecture and History Non-Sacred;Year 2;number of attractions;14
+5. Nature, Parks and Animals;Year 2;number of attractions;16
+6. Religious Sites;Year 2;number of attractions;33
+7. Shopping;Year 2;number of attractions;12
+Total;Year 2;number of attractions;280
+1. Iconic;Year 2;number of reviews;13210
+2. Monuments and Streets;Year 2;number of reviews;5576
+3. Museums and Theatres;Year 2;number of reviews;4665
+4. Architecture and History Non-Sacred;Year 2;number of reviews;1637
+5. Nature, Parks and Animals;Year 2;number of reviews;815
+6. Religious Sites;Year 2;number of reviews;673
+7. Shopping;Year 2;number of reviews;201
+Total;Year 2;number of reviews;26777
+1. Iconic;Year 3;number of attractions;5
+2. Monuments and Streets;Year 3;number of attractions;167
+3. Museums and Theatres;Year 3;number of attractions;83
+4. Architecture and History Non-Sacred;Year 3;number of attractions;17
+5. Nature, Parks and Animals;Year 3;number of attractions;23
+6. Religious Sites;Year 3;number of attractions;44
+7. Shopping;Year 3;number of attractions;15
+Total;Year 3;number of attractions;354
+1. Iconic;Year 3;number of reviews;17529
+2. Monuments and Streets;Year 3;number of reviews;10046
+3. Museums and Theatres;Year 3;number of reviews;5424
+4. Architecture and History Non-Sacred;Year 3;number of reviews;3186
+5. Nature, Parks and Animals;Year 3;number of reviews;944
+6. Religious Sites;Year 3;number of reviews;895
+7. Shopping;Year 3;number of reviews;290
+Total;Year 3;number of reviews;38314
+1. Iconic;Year 4;number of attractions;5
+2. Monuments and Streets;Year 4;number of attractions;167
+3. Museums and Theatres;Year 4;number of attractions;74
+4. Architecture and History Non-Sacred;Year 4;number of attractions;25
+5. Nature, Parks and Animals;Year 4;number of attractions;23
+6. Religious Sites;Year 4;number of attractions;42
+7. Shopping;Year 4;number of attractions;21
+Total;Year 4;number of attractions;357
+1. Iconic;Year 4;number of reviews;14352
+2. Monuments and Streets;Year 4;number of reviews;7979
+3. Museums and Theatres;Year 4;number of reviews;4212
+4. Architecture and History Non-Sacred;Year 4;number of reviews;2363
+5. Nature, Parks and Animals;Year 4;number of reviews;739
+6. Religious Sites;Year 4;number of reviews;598
+7. Shopping;Year 4;number of reviews;291
+Total;Year 4;number of reviews;30534
+1. Iconic;Year 5;number of attractions;5
+2. Monuments and Streets;Year 5;number of attractions;195
+3. Museums and Theatres;Year 5;number of attractions;72
+4. Architecture and History Non-Sacred;Year 5;number of attractions;31
+5. Nature, Parks and Animals;Year 5;number of attractions;27
+6. Religious Sites;Year 5;number of attractions;40
+7. Shopping;Year 5;number of attractions;17
+Total;Year 5;number of attractions;387
+1. Iconic;Year 5;number of reviews;9979
+2. Monuments and Streets;Year 5;number of reviews;6224
+3. Museums and Theatres;Year 5;number of reviews;3125
+4. Architecture and History Non-Sacred;Year 5;number of reviews;1566
+5. Nature, Parks and Animals;Year 5;number of reviews;648
+6. Religious Sites;Year 5;number of reviews;458
+7. Shopping;Year 5;number of reviews;282
+Total;Year 5;number of reviews;22282
